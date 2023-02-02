@@ -11,7 +11,6 @@ class HashtagRepository {
   }
 
   // here data is in form of array of objects
-
   async bulkCreate(data) {
     try {
       const tags = hashTagModel.insertMany(data)
@@ -25,6 +24,17 @@ class HashtagRepository {
     try {
       const tag = await hashTagModel.findById(tag_Id)
       return tag
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async findByName(titleList) {
+    try {
+      const tags = await hashTagModel.find({
+        title: titleList,
+      })
+      return tags
     } catch (error) {
       console.log(error)
     }

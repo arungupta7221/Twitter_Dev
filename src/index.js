@@ -3,7 +3,7 @@ const App = express()
 const connect = require('./config/databse')
 // const tweetModel = require('./models/Tweet')
 const HashtagRepository = require('./repository/hashtag-repository')
-const Comment = require('./models/Comment')
+const TweetService = require('./services/tweet-service')
 App.listen(3000, async () => {
   console.log('server has started')
   await connect()
@@ -37,31 +37,9 @@ App.listen(3000, async () => {
   // const tweet = await tweetRepo.getAll(0, 3)
   // console.log(tweet)
 
-  let repo = new HashtagRepository()
-  await repo.bulkCreate([
-    {
-      title: 'Fun',
-      tweets: [],
-    },
-    {
-      title: 'Happy',
-      tweets: [],
-    },
-    {
-      title: 'Developer',
-      tweets: [],
-    },
-    {
-      title: 'Study',
-      tweets: [],
-    },
-    {
-      title: 'Carrer',
-      tweets: [],
-    },
-    {
-      title: 'Winter',
-      tweets: [],
-    },
-  ])
+  const service = new TweetService()
+  const tweet = await service.create({
+    content: 'Hi this is my #second tweet so #feeling #excited for this.',
+  })
+  console.log(tweet)
 })
