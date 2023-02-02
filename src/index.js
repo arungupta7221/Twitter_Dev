@@ -1,9 +1,11 @@
-const express = require('express')
+import express from 'express'
+import { connect } from './config/databse.js'
 const App = express()
-const connect = require('./config/databse')
+
 // const tweetModel = require('./models/Tweet')
-const HashtagRepository = require('./repository/hashtag-repository')
-const TweetService = require('./services/tweet-service')
+// const HashtagRepository = require('./repository/hashtag-repository')
+// const TweetService = require('./services/tweet-service')
+import TweetService from './services/tweet-service.js'
 App.listen(3000, async () => {
   console.log('server has started')
   await connect()
@@ -37,9 +39,14 @@ App.listen(3000, async () => {
   // const tweet = await tweetRepo.getAll(0, 3)
   // console.log(tweet)
 
-  const service = new TweetService()
-  const tweet = await service.create({
-    content: 'Hi this is my #second tweet so #feeling #excited for this.',
+  // const service = new TweetService()
+  // const tweet = await service.create({
+  //   content: 'Hi this is my #second tweet so #feeling #excited for this.',
+  // })
+  // console.log(tweet)
+
+  const ser = new TweetService()
+  await ser.create({
+    content: 'done with #refactor',
   })
-  console.log(tweet)
 })

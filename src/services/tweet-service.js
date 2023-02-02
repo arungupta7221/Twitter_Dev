@@ -1,4 +1,4 @@
-const { TweetRepository, HashtagRepository } = require('../repository/index')
+import { TweetRepository, HashtagRepository } from '../repository/index.js'
 
 class TweetService {
   constructor() {
@@ -17,7 +17,7 @@ class TweetService {
       filterTags = filterTags.map((tag) => {
         return { title: tag, tweets: [tweet.id] }
       })
-      console.log(filterTags)
+
       await this.hashtagRepository.bulkCreate(filterTags) // it will create all the filtertags in database
 
       alreadyPresentags.forEach((tag) => {
@@ -30,4 +30,4 @@ class TweetService {
     }
   }
 }
-module.exports = TweetService
+export default TweetService
