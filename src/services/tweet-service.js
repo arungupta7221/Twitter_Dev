@@ -9,7 +9,7 @@ class TweetService {
     try {
       const content = data.content
       let tags = content.match(/#[a-zA-Z0-9_]+/g) // this is a regular expression which is used for extract all the hashtags from content
-      tags = tags.map((tag) => tag.substring(1)) // it will remove # from tags => ['Excited','Fun', 'Happy', 'Developer','Sad']
+      tags = tags.map((tag) => tag.substring(1).toLowerCase()) // it will remove # from tags => ['Excited','Fun', 'Happy', 'Developer','Sad']  and we are storing hashtag only in lowercase
       const tweet = await this.tweetRepository.create(data)
       let alreadyPresentags = await this.hashtagRepository.findByName(tags)
       let titleOfAlreadyPresentTag = alreadyPresentags.map((tag) => tag.title) // this will return all the tags which are already in database and it will return only title =>[ 'Fun', 'Happy', 'Developer' ]

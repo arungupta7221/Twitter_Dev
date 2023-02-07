@@ -1,11 +1,13 @@
-import express from 'express'
+import express, { application } from 'express'
 import { connect } from './config/databse.js'
+import apiRoutes from './routes/index.js'
 const App = express()
-
+App.use(express.json())
+App.use('/api', apiRoutes)
 // const tweetModel = require('./models/Tweet')
 // const HashtagRepository = require('./repository/hashtag-repository')
 // const TweetService = require('./services/tweet-service')
-import TweetService from './services/tweet-service.js'
+
 App.listen(3000, async () => {
   console.log('server has started')
   await connect()
@@ -44,9 +46,4 @@ App.listen(3000, async () => {
   //   content: 'Hi this is my #second tweet so #feeling #excited for this.',
   // })
   // console.log(tweet)
-
-  const ser = new TweetService()
-  await ser.create({
-    content: 'done with #refactor',
-  })
 })
